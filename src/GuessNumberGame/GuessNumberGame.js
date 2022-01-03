@@ -5,13 +5,15 @@ import "./GuessNumberGame.scss";
 function GuessNumberGame() {
   const [guessnumber, setGuessnumber] = React.useState();
 
-  const [corretNumber] = useState(Math.floor(Math.random() * 100 + 1));
+  const [corretNumber, setCorretNumber] = useState(
+    Math.floor(Math.random() * 100 + 1)
+  );
 
   let [guesses, setGuess] = useState([]);
 
   function playGame() {
     let numberGuess = document.getElementById("number-guess").value;
-    console.log("numberGuess", numberGuess);
+    // console.log("numberGuess", numberGuess);
 
     displayResult();
     saveGuessHistory(numberGuess);
@@ -27,10 +29,16 @@ function GuessNumberGame() {
     }
   }
 
-  function saveGuessHistory(guess) {
-    setGuess(guesses.concat(guess));
+  function restartGame() {
+    setCorretNumber(Math.floor(Math.random() * 100 + 1));
+    setGuess([]);
+    document.getElementById("result").innerHTML = "";
   }
-  console.log("guesses", guesses);
+
+  function saveGuessHistory(guess) {
+    setGuess(guesses?.concat(guess));
+  }
+  // console.log("guesses", guesses);
 
   function getDialog(dialogType, text) {
     let dialog;
@@ -116,10 +124,21 @@ function GuessNumberGame() {
           >
             Check Me
           </button>
-          <button type="button" id="restart-game" class="btn btn-lg btn-light">
+          <button
+            type="button"
+            id="restart-game"
+            onClick={restartGame}
+            class="btn btn-lg btn-light"
+          >
             Restart
           </button>
-          <div id="history"></div>
+          <div id="history" className="show-history">
+            {guesses?.map((guess) => (
+              <ul className="list-group ">
+                <li className="list-group-item">you guessed {guess}</li>
+              </ul>
+            ))}
+          </div>
         </div>
       </div>
     </div>

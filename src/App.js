@@ -13,6 +13,8 @@ import Requests from "./Requests/Requests";
 
 import { useStateValue } from "./store/StateProvider";
 import GuessNumberGame from "./GuessNumberGame/GuessNumberGame";
+import Sortinng from "./sorting/Sortinng";
+import TextEditors from "./TextEditors/TextEditors";
 
 function App() {
   const [{ user }] = useStateValue();
@@ -33,7 +35,12 @@ function App() {
             <Login />
           </Route>
         )}
-
+        <Route path="/texteditor">
+          <TextEditors />{" "}
+        </Route>
+        <Route path="/sorting">
+          <Sortinng />{" "}
+        </Route>
         <Route path="/guessnumber">
           <GuessNumberGame />{" "}
         </Route>
